@@ -58,7 +58,16 @@ public class HomeController {
     }
 
     @GetMapping("/InunakiVillage/{android_id}")
-    public String inunakiVillage() {
-        return "InunakiVillage/InunakiVillage";
+    public String inunakiVillage(@PathVariable String android_id) throws ExecutionException, InterruptedException {
+        Language languages = new Language();
+        languages = getCurrentTag(android_id);
+
+        if (languages.getTag().equals("vi")) {
+            return "InunakiVillage/InunakiVillage_vi";
+        } else if (languages.getTag().equals("en")) {
+            return "InunakiVillage/InunakiVillage_en";
+        }
+
+        return "InunakiVillage/InunakiVillage_en";
     }
 }
